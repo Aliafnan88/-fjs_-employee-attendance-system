@@ -1,4 +1,12 @@
-const adminPassword = 'admin123';  // Admin password for record viewing
+ const adminPassword = 'admin123';  // Admin password for record viewing
+
+// Load existing attendance data when the page loads
+window.onload = function() {
+    const attendance = JSON.parse(localStorage.getItem('attendance')) || [];
+    if (attendance.length > 0) {
+        alert("Welcome back! Attendance data is available.");
+    }
+};
 
 function getLocation(action) {
     if (navigator.geolocation) {
@@ -84,4 +92,13 @@ function showAttendance() {
         `;
     });
     document.querySelector('.attendance-section').style.display = 'block';
+}
+
+// Optional: Function to clear all attendance data
+function clearAttendanceData() {
+    const confirmation = confirm("Are you sure you want to clear all attendance data?");
+    if (confirmation) {
+        localStorage.removeItem('attendance');
+        alert("All attendance data has been cleared.");
+    }
 }
